@@ -4,8 +4,12 @@ test('GET users API test', async ({ request }) => {
 
   const response = await request.get('https://jsonplaceholder.typicode.com/users');
 
-  console.log(await response.json());
-
   expect(response.status()).toBe(200);
+
+  const users = await response.json();
+
+  expect(users.length).toBeGreaterThan(0);
+
+  expect(users[0]).toHaveProperty('name');
 
 });
